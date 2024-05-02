@@ -12,18 +12,14 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "teachers")
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Clazz clazz;
-
-    @OneToMany(mappedBy = "student")
-    private Set<Grade> grades;
+    @OneToMany(mappedBy = "teacher")
+    private Set<TeacherSubject> teacherSubjects;
 
     @Column(nullable = false)
     private String firstName;

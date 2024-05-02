@@ -12,39 +12,23 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "classes")
+public class Clazz {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Clazz clazz;
+    @OneToMany(mappedBy = "clazz")
+    private Set<Student> students;
 
-    @OneToMany(mappedBy = "student")
-    private Set<Grade> grades;
-
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = true)
-    private String middleName;
+    @OneToMany(mappedBy = "clazz")
+    private Set<TeacherSubjectClass> classesTeachersSubjects;
 
     @Column(nullable = false)
-    private String lastName;
+    private Integer grade;
 
     @Column(nullable = false)
-    private String phoneNumber;
-
-    @Column(nullable = false)
-    private String emailAddress;
-
-    @Column(nullable = false)
-    private String homeAddress;
-
-    @Column(nullable = false, unique = true)
-    private String registrationNumber;
+    private String letter;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
