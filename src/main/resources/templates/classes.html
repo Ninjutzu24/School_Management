@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Teachers</title>
+    <title>Classes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -67,33 +67,23 @@
     </div>
 </nav>
 
-<h1 style="text-align: center; margin-bottom: 20px; margin-top: 60px">Teachers</h1>
+<h1 style="text-align: center; margin-bottom: 20px; margin-top: 60px">Classes</h1>
 <table class="table table-dark">
     <thead>
     <th scope="col">Id</th>
-    <th scope="col">First Name</th>
-    <th scope="col">Middle Name</th>
-    <th scope="col">Last Name</th>
-    <th scope="col">Phone Number</th>
-    <th scope="col">Email Address</th>
-    <th scope="col">Home Address</th>
-    <th scope="col">Registration number</th>
+    <th scope="col">Grade</th>
+    <th scope="col">Letter</th>
     <th scope="col">Created At</th>
     <th scope="col">Updated At</th>
     </thead>
 
     <tbody>
-    <tr th:each="teacher : ${teachers}">
-        <td th:text="${teacher.id}"></td>
-        <td th:text="${teacher.firstName}"></td>
-        <td th:text="${teacher.middleName}"></td>
-        <td th:text="${teacher.lastName}"></td>
-        <td th:text="${teacher.phoneNumber}"></td>
-        <td th:text="${teacher.getEmailAddress}"></td>
-        <td th:text="${teacher.getHomeAddress}"></td>
-        <td th:text="${teacher.registrationNumber}"></td>
-        <td th:text="${teacher.createdAt}"></td>
-        <td th:text="${teacher.updatedAt}"></td>
+    <tr th:each="clazz : ${classes}">
+        <td th:text="${clazz.id}"></td>
+        <td th:text="${clazz.grade}"></td>
+        <td th:text="${clazz.letter}"></td>
+        <td th:text="${clazz.createdAt}"></td>
+        <td th:text="${clazz.updatedAt}"></td>
     </tr>
     </tbody>
 </table>
@@ -102,5 +92,4 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

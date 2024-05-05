@@ -29,3 +29,16 @@ insert into teachers (id, first_name, middle_name, last_name, phone_number, emai
 insert into teachers (id, first_name, middle_name, last_name, phone_number, email_address, home_address, registration_number, created_at, updated_at) values (28, 'Vivyan', 'Dene', 'Marquese', '250-363-3964', 'dmarqueser@msn.com', '877 Ruskin Way', 10028, now(), now());
 insert into teachers (id, first_name, middle_name, last_name, phone_number, email_address, home_address, registration_number, created_at, updated_at) values (29, 'Giffard', null, 'Guirardin', '927-552-0221', 'bguirardins@networkadvertising.org', '746 Miller Pass', 10029, now(), now());
 insert into teachers (id, first_name, middle_name, last_name, phone_number, email_address, home_address, registration_number, created_at, updated_at) values (30, 'Guthry', null, 'Arthars', '153-895-8198', 'vartharst@ehow.com', '3852 Transport Way', 10030, now(), now());
+
+insert into classes(id, grade, letter, created_at, updated_at) values(1, 9, 'A', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(2, 10, 'A', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(3, 11, 'A', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(4, 12, 'A', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(5, 9, 'B', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(6, 10, 'B', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(7, 11, 'B', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(8, 12, 'B', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(9, 9, 'C', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(10, 10, 'C', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(11, 11, 'C', now(), now());
+insert into classes(id, grade, letter, created_at, updated_at) values(12, 12, 'C', now(), now());
