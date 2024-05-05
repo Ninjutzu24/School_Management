@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "teachers_subjects_classes")
 public class TeacherSubjectClass {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

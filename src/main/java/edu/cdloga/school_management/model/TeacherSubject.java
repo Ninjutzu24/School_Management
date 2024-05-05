@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "teachers_subjects")
 public class TeacherSubject {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(mappedBy = "teacherSubject")

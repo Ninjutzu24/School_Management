@@ -16,4 +16,8 @@ public class TeacherService {
     public Set<Teacher> getAllTeachers() {
         return teacherRepository.getAllTeachers();
     }
+
+    public Teacher saveTeacher(Teacher teacher) {
+        return teacherRepository.save(teacher);
+    }
 }

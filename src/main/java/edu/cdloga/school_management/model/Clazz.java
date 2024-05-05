@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "classes")
 public class Clazz {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "clazz")
