@@ -30,6 +30,7 @@ insert into teachers (first_name, middle_name, last_name, phone_number, email_ad
 insert into teachers (first_name, middle_name, last_name, phone_number, email_address, home_address, registration_number, created_at, updated_at) values ('Giffard', null, 'Guirardin', '927-552-0221', 'bguirardins@networkadvertising.org', '746 Miller Pass', 10029, now(), now());
 insert into teachers (first_name, middle_name, last_name, phone_number, email_address, home_address, registration_number, created_at, updated_at) values ('Guthry', null, 'Arthars', '153-895-8198', 'vartharst@ehow.com', '3852 Transport Way', 10030, now(), now());
 
+-- Adding classes
 insert into classes(grade, letter, created_at, updated_at) values(9, 'A', now(), now());
 insert into classes(grade, letter, created_at, updated_at) values(10, 'A', now(), now());
 insert into classes(grade, letter, created_at, updated_at) values(11, 'A', now(), now());
@@ -42,3 +43,7 @@ insert into classes(grade, letter, created_at, updated_at) values(9, 'C', now(),
 insert into classes(grade, letter, created_at, updated_at) values(10, 'C', now(), now());
 insert into classes(grade, letter, created_at, updated_at) values(11, 'C', now(), now());
 insert into classes(grade, letter, created_at, updated_at) values(12, 'C', now(), now());
+
+-- Adding classes
+insert into subjects(name, created_at, updated_at) values ('Math', now(), now());
+insert into subjects(name, created_at, updated_at) values ('English', now(), now());
