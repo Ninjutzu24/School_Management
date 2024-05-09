@@ -21,7 +21,7 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private Set<TeacherSubject> teacherSubjects;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @CreationTimestamp

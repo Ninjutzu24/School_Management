@@ -25,7 +25,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:8080">Home</a>
+                        <a class="nav-link active" aria-current="page" href="http://localhost:8080">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
@@ -44,7 +44,21 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/assignment">Assign a teacher to a class</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/subject/form">Assign a teacher to a class</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Students
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="http://localhost:8080/students">Students List</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/student/form">Add a student</a></li>
                         </ul>
                     </li>
 
@@ -59,6 +73,20 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="http://localhost:8080/class/form">Add a class</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Subjects
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="http://localhost:8080/subjects">Subjects List</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/subject/form">Add a subject</a></li>
                         </ul>
                     </li>
                 </ul>

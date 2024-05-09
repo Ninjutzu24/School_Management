@@ -12,7 +12,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "classes")
+@Table(
+        name = "classes",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"grade", "letter"})
+)
 public class Clazz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

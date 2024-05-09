@@ -2,19 +2,23 @@ package edu.cdloga.school_management.service;
 
 import edu.cdloga.school_management.model.Clazz;
 import edu.cdloga.school_management.repository.ClazzRepository;
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.util.Set;
 
-@Service
+@Component
+@RequiredArgsConstructor
 public class ClazzService {
 
     private final ClazzRepository clazzRepository;
 
-    public ClazzService(ClazzRepository clazzRepository) {
-        this.clazzRepository = clazzRepository;
-    }
-
     public Set<Clazz> getAllClasses() {
         return clazzRepository.getAllClasses();
     }
+
+    public Clazz saveClass(Clazz clazz) {
+        return clazzRepository.save(clazz);
+    }
+
 }
