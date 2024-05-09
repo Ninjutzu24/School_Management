@@ -25,8 +25,8 @@ public class TeacherService {
         return teacherRepository.save(teacher);
     }
 
-    public void assignTeacherToClass(TeacherSubject teacherSubject) {
-        teacherSubjectRepository.save(teacherSubject);
+    public TeacherSubject assignTeacherToClass(TeacherSubject teacherSubject) {
+        return teacherSubjectRepository.save(teacherSubject);
     }
 
     public Optional<Teacher> findTeacherById(Long teacherId) {

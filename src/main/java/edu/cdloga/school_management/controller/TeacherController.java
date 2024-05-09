@@ -7,12 +7,14 @@ import edu.cdloga.school_management.service.ClazzService;
 import edu.cdloga.school_management.service.SubjectService;
 import edu.cdloga.school_management.service.TeacherService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class TeacherController {
@@ -45,16 +47,18 @@ public class TeacherController {
     }
 
     @GetMapping("/teacher/subject/form")
-    public String getTeacherAssignmentForm(Model model) {
+    public String getTeacherSubjectForm(Model model) {
         var teacherSubject = new TeacherSubject();
         teacherSubject.setTeacher(new Teacher());
         teacherSubject.setSubject(new Subject());
         model.addAttribute("teacherSubject", teacherSubject);
+        model.addAttribute("teachers",teacherService.getAllTeachers());
+        model.addAttribute("subjects", subjectService.getAllSubjects());
         return "teacher_subject_form";
     }
 
     @PostMapping("/teacher/subject/assign")
-    public String assignTeacherToClass(
+    public String assignTeacherToSubject(
             @ModelAttribute("teacherSubject") TeacherSubject teacherSubjectForm,
             Model model
     ) {
@@ -75,9 +79,13 @@ public class TeacherController {
             teacherSubject.setSubject(subjectOptional.get());
             teacherSubject.setTeacher(teacherOptional.get());
 
-            teacherService.assignTeacherToClass(teacherSubject);
+            var teacherSubjectSaved = teacherService.assignTeacherToClass(teacherSubject);
+
             model.addAttribute("state", "added");
+            model.addAttribute("teacher", teacherSubjectSaved.getTeacher());
+            model.addAttribute("subject", teacherSubjectSaved.getSubject());
         } catch (Exception exception) {
+            log.error("Error: {}", exception.getMessage());
             model.addAttribute("state", "notAdded");
         }
         return "teacher_subject_form";

@@ -44,8 +44,10 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="http://localhost:8080/teachers">Teachers List</a></li>
-                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/form">Add a Teacher</a></li>
-                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/subject/form">Assign Teacher to Class</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/form">Add a Teacher</a>
+                            </li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/subject/form">Assign
+                                Teacher to Class</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -55,7 +57,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="http://localhost:8080/students">Students List</a></li>
-                            <li><a class="dropdown-item" href="http://localhost:8080/student/form">Add a Student</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/student/form">Add a Student</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -75,7 +78,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="http://localhost:8080/subjects">Subjects List</a></li>
-                            <li><a class="dropdown-item" href="http://localhost:8080/subject/form">Add a Subject</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/subject/form">Add a Subject</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -87,14 +91,24 @@
 <div class="row">
     <h1>Assign Teacher to Class</h1>
 
-    <form th:action="@{/teacher/subject/assign}" method="post" th:object="${teacherSubject}">
+    <h1 th:if="${state != null and state != 'notAdded'}" th:text="${teacher.lastName + ' ' + teacher.firstName + ' | ' + subject.name}"></h1>
+
+    <form th:if="${state == null}" th:action="@{/teacher/subject/assign}" method="post" th:object="${teacherSubject}">
         <div class="col">
-            <label for="teacherId" class="form-label">Teacher ID:</label>
-            <input type="text" class="form-control" id="teacherId" name="teacherId" th:field="*{teacher.id}">
+            <label for="teacherSelect" class="visually-hidden">Teacher:</label>
+            <select class="form-select" id="teacherSelect" th:field="*{teacher.id}">
+                <option selected="Teacher" th:value="${teacherSubject}">Teacher</option>
+                <option th:each="teacherValue : ${teachers}" th:value="${teacherValue.id}"
+                        th:text="${teacherValue.lastName+' '+teacherValue.firstName}"></option>
+            </select>
         </div>
         <div class="col">
-            <label for="classId" class="form-label">Class ID:</label>
-            <input type="text" class="form-control" id="classId" name="classId" th:field="*{subject.id}">
+            <label for="subjectSelect" class="visually-hidden">Subject:</label>
+            <select class="form-select" id="subjectSelect" th:field="*{subject.id}">
+                <option selected="Subject" th:value="${teacherSubject}">Subject</option>
+                <option th:each="subjectValue : ${subjects}" th:value="${subjectValue.id}"
+                        th:text="${subjectValue.name}"></option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Assign</button>
     </form>
