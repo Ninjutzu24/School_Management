@@ -1,11 +1,11 @@
 package edu.cdloga.school_management.service;
 
 import edu.cdloga.school_management.model.Student;
-import edu.cdloga.school_management.model.Teacher;
 import edu.cdloga.school_management.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -20,5 +20,9 @@ public class StudentService {
 
     public Student saveStudent(Student student) {
         return studentRepository.save(student);
+    }
+
+    public Optional<Student> findStudentById(Long studentId) {
+        return studentRepository.findById(studentId);
     }
 }

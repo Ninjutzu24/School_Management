@@ -25,4 +25,5 @@ public class ClazzService {
     public Optional<Clazz> findClassById(Long clazzId) {
         return clazzRepository.findById(clazzId);
     }
+
 }

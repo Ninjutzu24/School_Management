@@ -51,3 +51,6 @@ insert into subjects(name, created_at, updated_at) values ('English', now(), now
 -- Adding teacher subjects
 insert into teachers_subjects(teacher_id, subject_id, created_at, updated_at) values(1, 1, now(), now());
 insert into teachers_subjects(teacher_id, subject_id, created_at, updated_at) values(1, 2, now(), now());
+
+-- Adding students
+insert into students (first_name, middle_name, last_name, phone_number, email_address, home_address, registration_number, created_at, updated_at) values ('Andrei', null, 'Roman', '073-123-4567', 'andrei.roman@e-cdloga.ro', 'Dumbravita', 10030, now(), now());
