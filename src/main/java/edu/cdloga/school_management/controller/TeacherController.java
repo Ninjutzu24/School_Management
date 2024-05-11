@@ -26,13 +26,13 @@ public class TeacherController {
     @GetMapping(path = "/teachers")
     public String getTeachers(Model model) {
         model.addAttribute("teachers", teacherService.getAllTeachers());
-        return "teachers";
+        return "teachers/teachers";
     }
 
     @GetMapping(path = "/teacher/form")
     public String getTeacherForm(Model model) {
         model.addAttribute("teacher", new Teacher());
-        return "teacher_form";
+        return "teachers/teacher_form";
     }
 
     @PostMapping(path = "/teacher/register")
@@ -43,7 +43,7 @@ public class TeacherController {
         } catch (Exception exception) {
             model.addAttribute("state", "notAdded");
         }
-        return "teacher_form";
+        return "teachers/teacher_form";
     }
 
     @GetMapping("/teacher/subject/form")
@@ -52,9 +52,9 @@ public class TeacherController {
         teacherSubject.setTeacher(new Teacher());
         teacherSubject.setSubject(new Subject());
         model.addAttribute("teacherSubject", teacherSubject);
-        model.addAttribute("teachers",teacherService.getAllTeachers());
+        model.addAttribute("teachers", teacherService.getAllTeachers());
         model.addAttribute("subjects", subjectService.getAllSubjects());
-        return "teacher_subject_form";
+        return "teachers/teacher_subject_form";
     }
 
     @PostMapping("/teacher/subject/assign")
@@ -64,22 +64,22 @@ public class TeacherController {
     ) {
         try {
             var subjectOptional = subjectService.findSubjectById(teacherSubjectForm.getSubject().getId());
-            if(subjectOptional.isEmpty()) {
+            if (subjectOptional.isEmpty()) {
                 model.addAttribute("state", "notAdded");
-                return "teacher_subject_form";
+                return "teachers/teacher_subject_form";
             }
 
             var teacherOptional = teacherService.findTeacherById(teacherSubjectForm.getTeacher().getId());
-            if(teacherOptional.isEmpty()) {
+            if (teacherOptional.isEmpty()) {
                 model.addAttribute("state", "notAdded");
-                return "teacher_subject_form";
+                return "teachers/teacher_subject_form";
             }
 
             var teacherSubject = new TeacherSubject();
             teacherSubject.setSubject(subjectOptional.get());
             teacherSubject.setTeacher(teacherOptional.get());
 
-            var teacherSubjectSaved = teacherService.assignTeacherToClass(teacherSubject);
+            var teacherSubjectSaved = teacherService.assignTeacherToSubject(teacherSubject);
 
             model.addAttribute("state", "added");
             model.addAttribute("teacher", teacherSubjectSaved.getTeacher());
@@ -88,6 +88,6 @@ public class TeacherController {
             log.error("Error: {}", exception.getMessage());
             model.addAttribute("state", "notAdded");
         }
-        return "teacher_subject_form";
+        return "teachers/teacher_subject_form";
     }
 }

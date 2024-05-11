@@ -18,13 +18,13 @@ public class StudentController {
     @GetMapping(path = "/students")
     public String getStudents(Model model) {
         model.addAttribute("students", studentService.getAllStudents());
-        return "students";
+        return "students/students";
     }
 
     @GetMapping(path = "/student/form")
     public String getStudentForm(Model model) {
         model.addAttribute("student", new Student());
-        return "student_form";
+        return "students/student_form";
     }
 
     @PostMapping(path = "/student/register")
@@ -35,6 +35,6 @@ public class StudentController {
         } catch (Exception exception) {
             model.addAttribute("state", "notAdded");
         }
-        return "student_form";
+        return "students/student_form";
     }
 }

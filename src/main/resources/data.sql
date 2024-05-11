@@ -47,3 +47,7 @@ insert into classes(grade, letter, created_at, updated_at) values(12, 'C', now()
 -- Adding classes
 insert into subjects(name, created_at, updated_at) values ('Math', now(), now());
 insert into subjects(name, created_at, updated_at) values ('English', now(), now());
+
+-- Adding teacher subjects
+insert into teachers_subjects(teacher_id, subject_id, created_at, updated_at) values(1, 1, now(), now());
+insert into teachers_subjects(teacher_id, subject_id, created_at, updated_at) values(1, 2, now(), now());

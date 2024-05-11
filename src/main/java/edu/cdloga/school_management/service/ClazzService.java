@@ -5,6 +5,7 @@ import edu.cdloga.school_management.repository.ClazzRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -21,4 +22,7 @@ public class ClazzService {
         return clazzRepository.save(clazz);
     }
 
+    public Optional<Clazz> findClassById(Long clazzId) {
+        return clazzRepository.findById(clazzId);
+    }
 }

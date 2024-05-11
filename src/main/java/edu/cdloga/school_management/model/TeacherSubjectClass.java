@@ -11,7 +11,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "teachers_subjects_classes")
+@Table(
+        name = "teachers_subjects_classes",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"class_id", "teacher_subject_id"})
+)
 public class TeacherSubjectClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

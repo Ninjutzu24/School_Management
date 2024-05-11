@@ -18,13 +18,13 @@ public class SubjectController {
     @GetMapping(path = "/subjects")
     public String getSubjects(Model model) {
         model.addAttribute("subjects", subjectService.getAllSubjects());
-        return "subjects";
+        return "subjects/subjects";
     }
 
     @GetMapping(path = "/subject/form")
     public String getSubjectForm(Model model) {
         model.addAttribute("subject", new Subject());
-        return "subject_form";
+        return "subjects/subject_form";
     }
 
     @PostMapping(path = "/subjects/register")
@@ -35,9 +35,6 @@ public class SubjectController {
         } catch (Exception exception) {
             model.addAttribute("state", "notAdded");
         }
-        return "subject_form";
+        return "subjects/subject_form";
     }
-
-
-
 }
