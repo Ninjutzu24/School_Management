@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.stream.Collectors;
-
-import static java.math.RoundingMode.FLOOR;
 
 @Slf4j
 @Controller
@@ -150,7 +149,7 @@ public class GradeController {
 
     private Float roundGrade(Float grade) {
         return BigDecimal.valueOf(grade)
-                .setScale(2, FLOOR)
+                .setScale(2, RoundingMode.UP)
                 .floatValue();
     }
 }
