@@ -17,8 +17,8 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "teacher_subject_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_subject_id")
     private TeacherSubject teacherSubject;
 
     @ManyToOne(fetch = FetchType.LAZY)

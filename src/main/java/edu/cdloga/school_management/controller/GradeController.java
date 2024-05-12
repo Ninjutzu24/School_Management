@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
+
+import static java.math.RoundingMode.FLOOR;
 
 @Slf4j
 @Controller
@@ -22,6 +25,12 @@ public class GradeController {
     private final GradeService gradeService;
     private final StudentService studentService;
     private final TeacherService teacherService;
+
+    @GetMapping(path = "/grades")
+    public String getGrades(Model model) {
+        model.addAttribute("grades", gradeService.getAllGrades());
+        return "/grades/grades";
+    }
 
     @GetMapping(path = "/grade/form")
     public String getGradeForm(Model model) {
@@ -42,6 +51,11 @@ public class GradeController {
             @ModelAttribute(name = "grade") Grade gradeForm,
             Model model
     ) {
+        if (gradeForm.getGradeValue() < 1.0f || gradeForm.getGradeValue() > 10.0f) {
+            model.addAttribute("state", "notAdded");
+            return "grades/grade_form";
+        }
+
         var studentOptional = studentService.findStudentById(gradeForm.getStudent().getId());
         if (studentOptional.isEmpty()) {
             model.addAttribute("state", "notAdded");
@@ -56,7 +70,7 @@ public class GradeController {
 
         try {
             var grade = new Grade();
-            grade.setGradeValue(gradeForm.getGradeValue());
+            grade.setGradeValue(roundGrade(gradeForm.getGradeValue()));
             grade.setStudent(studentOptional.get());
             grade.setTeacherSubject(teacherSubjectOptional.get());
 
@@ -69,5 +83,11 @@ public class GradeController {
         }
 
         return "grades/grade_form";
+    }
+
+    private Float roundGrade(Float grade) {
+        return BigDecimal.valueOf(grade)
+                .setScale(2, FLOOR)
+                .floatValue();
     }
 }

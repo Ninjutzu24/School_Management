@@ -5,6 +5,8 @@ import edu.cdloga.school_management.repository.GradeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 @RequiredArgsConstructor
 public class GradeService {
@@ -13,5 +15,9 @@ public class GradeService {
 
     public Grade saveGrade(Grade grade) {
         return gradeRepository.save(grade);
+    }
+
+    public Set<Grade> getAllGrades() {
+        return gradeRepository.getAllGrades();
     }
 }

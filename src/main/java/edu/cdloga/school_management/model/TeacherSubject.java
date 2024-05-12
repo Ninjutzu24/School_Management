@@ -21,8 +21,8 @@ public class TeacherSubject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "teacherSubject")
-    private Grade grade;
+    @OneToMany(mappedBy = "teacherSubject")
+    private Set<Grade> grade;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
