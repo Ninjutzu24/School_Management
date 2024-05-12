@@ -9,7 +9,7 @@ import java.util.Set;
 public interface ClazzRepository extends CrudRepository<Clazz, Long> {
 
     @Query(
-            value = "select * from classes",
+            value = "select * from classes c order by c.grade, c.letter",
             nativeQuery = true
     )
     Set<Clazz> getAllClasses();

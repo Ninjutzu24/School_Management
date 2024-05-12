@@ -47,4 +47,8 @@ public class TeacherService {
     public TeacherSubjectClass assignTeacherToClass(TeacherSubjectClass teacherSubjectClass) {
         return teacherSubjectClassRepository.save(teacherSubjectClass);
     }
+
+    public Set<TeacherSubject> getAllTeacherSubjectsByClassId(Long classId) {
+        return teacherSubjectRepository.getAllTeacherSubjectsByClass(classId);
+    }
 }

@@ -8,17 +8,11 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         h1, h2, form {
-            margin-left: 50px;
-            margin-right: 50px;
-        }
-
-        .row {
-            max-width: 80%;
-            margin-left: 30px;
+            color: white;
         }
     </style>
 </head>
-<body>
+<body style="background-color: dimgray">
 
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -52,8 +46,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/subject/form">Assign a
-                                teacher to a class</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/subject/form">Assign a Subject to Teacher</a></li>
                         </ul>
                     </li>
 
@@ -110,7 +103,9 @@
                            aria-expanded="false">Grades</a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="http://localhost:8080/grades">Grades List</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="http://localhost:8080/grade/form">Add a grade</a></li>
                         </ul>
                     </li>
@@ -120,42 +115,67 @@
     </div>
 </nav>
 
-<h1 style="text-align: center; margin-bottom: 20px; margin-top: 60px">Student Details</h1>
+<h1 style="text-align: center; margin-bottom: 20px; margin-top: 60px">Students</h1>
 
 <h2 th:if="${state == 'notFound'}">Student not found!</h2>
 
-<div class="row">
-    <table class="table table-dark" th:if="${student != null}">
-        <thead>
-        <th scope="col">ID</th>
-        <th scope="col">Class</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Middle Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Phone Number</th>
-        <th scope="col">Email Address</th>
-        <th scope="col">Home Address</th>
-        <th scope="col">Registration Number</th>
-        </thead>
+<table class="table table-dark" th:if="${state != 'notFound'}">
+    <thead>
+    <th scope="col">ID</th>
+    <th scope="col">Class</th>
+    <th scope="col">First Name</th>
+    <th scope="col">Middle Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Phone Number</th>
+    <th scope="col">Email Address</th>
+    <th scope="col">Home Address</th>
+    <th scope="col">Registration Number</th>
+    <th th:if="${student != null and student.clazz != null}" scope="col"></th>
+    </thead>
 
-        <tbody>
-        <tr>
-            <td th:text="${student.id}"></td>
-            <td th:text="${student.clazz != null ? (student.clazz.grade + student.clazz.letter) : '-'}"></td>
-            <td th:text="${student.firstName}"></td>
-            <td th:text="${student.middleName}"></td>
-            <td th:text="${student.lastName}"></td>
-            <td th:text="${student.phoneNumber}"></td>
-            <td th:text="${student.emailAddress}"></td>
-            <td th:text="${student.homeAddress}"></td>
-            <td th:text="${student.registrationNumber}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <tbody>
+    <tr>
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.clazz != null ? (student.clazz.grade + student.clazz.letter) : '-'}"></td>
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.middleName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.phoneNumber}"></td>
+        <td th:text="${student.emailAddress}"></td>
+        <td th:text="${student.homeAddress}"></td>
+        <td th:text="${student.registrationNumber}"></td>
+        <td th:if="${student != null and student.clazz != null}"><a class="btn btn-primary" th:href="${'http://localhost:8080/student/' + student.id + '/grade/form'}">Add grade</a></td>
+    </tr>
+    </tbody>
+</table>
 
-<div class="row" th:if="${student == null or student.clazz == null}">
-    <form th:action="@{'/students/' + ${student.id} + '/class/assign'}" method="post" th:object="${class}">
+<h1 style="text-align: center; margin-bottom: 20px; margin-top: 60px">Grades</h1>
+
+<table class="table table-dark" th:if="${state != 'notFound'}">
+    <thead>
+    <th scope="col">Id</th>
+    <th scope="col">Grade</th>
+    <th scope="col">Subject</th>
+    <th scope="col">Class</th>
+    <th scope="col">Student</th>
+    <th scope="col">Teacher</th>
+    </thead>
+
+    <tbody>
+    <tr th:each="grade : ${student.grades}">
+        <td th:text="${grade.id}"></td>
+        <td th:text="${grade.gradeValue}"></td>
+        <td th:text="${grade.teacherSubject.subject.name}"></td>
+        <td th:text="${grade.student.clazz.grade + grade.student.clazz.letter}"></td>
+        <td th:text="${grade.student.lastName + ' ' + grade.student.firstName}"></td>
+        <td th:text="${grade.teacherSubject.teacher.lastName + ' ' + grade.teacherSubject.teacher.firstName}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${student != null and student.clazz == null}">
+    <form th:action="@{'/students/' + ${student.id} + '/class/assign'}"
+          method="post" th:object="${class}">
         <div class="row">
             <label for="classSelect" class="visually-hidden">Class:</label>
             <select class="form-select" id="classSelect" th:field="*{id}">

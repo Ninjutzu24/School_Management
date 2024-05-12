@@ -15,5 +15,23 @@ public interface TeacherSubjectRepository extends CrudRepository<TeacherSubject,
             nativeQuery = true
     )
     Set<TeacherSubject> getAllTeacherSubjects();
+
+
+    @Query(
+            value = """
+                    SELECT 
+                        ts.id,
+                        ts.teacher_id,
+                        ts.subject_id,
+                        ts.created_at,
+                        ts.updated_at
+                    FROM teachers_subjects ts
+                        JOIN teachers_subjects_classes tsc ON tsc.teacher_subject_id = ts.id
+                        JOIN classes c ON tsc.class_id = c.id
+                    WHERE c.id = :classId
+                    """,
+            nativeQuery = true
+    )
+    Set<TeacherSubject> getAllTeacherSubjectsByClass(Long classId);
 }
 

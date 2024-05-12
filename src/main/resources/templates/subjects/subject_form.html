@@ -10,9 +10,10 @@
         h1, h2, form {
             margin-left: 50px;
             margin-right: 50px;
+            color: white;
         }
 
-        select {
+        select, input {
             max-width: 50%;
         }
 
@@ -20,12 +21,16 @@
             max-width: 80%;
         }
 
+        .first {
+            margin-top: 75px;
+        }
+
         .col {
-            margin-top: 20px
+            margin-top: 10px
         }
     </style>
 </head>
-<body>
+<body style="background-color: dimgray">
 
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -54,7 +59,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="http://localhost:8080/teacher/form">Add a teacher</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/subject/form">Assign a teacher to a class</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8080/teacher/subject/form">Assign a Subject to Teacher</a></li>
                         </ul>
                     </li>
 
@@ -109,21 +114,22 @@
     </div>
 </nav>
 
-<h1 style="text-align: center; margin-bottom: 20px; margin-top: 60px">Add a Subject</h1>
+<div class="row first">
+    <h1>Add a Subject</h1>
 
-<form th:action="@{/subjects/register}" method="post" th:object="${subject}">
-    <div class="row">
+    <form th:action="@{/subjects/register}" method="post" th:object="${subject}">
         <div class="col">
             <label for="inputSubject" class="form-label">Subject Name</label>
             <input type="text" class="form-control" placeholder="Math" id="inputSubject" th:field="*{name}">
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <button type="submit" class="btn btn-primary" name="submitBtn">Register</button>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary" name="submitBtn">Register</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 
 <div class="row">
     <div class="col" th:if="${state == 'added'}">

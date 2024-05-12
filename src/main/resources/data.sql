@@ -54,3 +54,7 @@ insert into teachers_subjects(teacher_id, subject_id, created_at, updated_at) va
 
 -- Adding students
 insert into students (class_id, first_name, middle_name, last_name, phone_number, email_address, home_address, registration_number, created_at, updated_at) values (1, 'Andrei', null, 'Roman', '073-123-4567', 'andrei.roman@e-cdloga.ro', 'Dumbravita', 10030, now(), now());
+
+-- Adding teacher subjects to classes
+insert into teachers_subjects_classes(teacher_subject_id, class_id, created_at, updated_at) values(1, 1, now(), now());
+insert into teachers_subjects_classes(teacher_subject_id, class_id, created_at, updated_at) values(2, 1, now(), now());
