@@ -2,6 +2,7 @@ package edu.cdloga.school_management.controller;
 
 import edu.cdloga.school_management.model.*;
 import edu.cdloga.school_management.service.ClazzService;
+import edu.cdloga.school_management.service.StudentService;
 import edu.cdloga.school_management.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
@@ -18,11 +20,33 @@ public class ClazzController {
 
     private final ClazzService clazzService;
     private final TeacherService teacherService;
+    private final StudentService studentService;
 
     @GetMapping(path = "/classes")
     public String getClasses(Model model) {
         model.addAttribute("classes", clazzService.getAllClasses());
         return "classes/classes";
+    }
+
+    @GetMapping(path = "/class/{classId}")
+    public String getClass(
+            @PathVariable(name = "classId") Long classId,
+            Model model
+    ) {
+        var clazzOptional = clazzService.findClassById(classId);
+        if (clazzOptional.isEmpty()) {
+            model.addAttribute("state", "notFound");
+            return "classes/class";
+        }
+
+        var studentsInClass = studentService.getAllStudentsByClass(classId);
+        model.addAttribute("students", studentsInClass);
+
+        var teacherSubjectsInClass = teacherService.getAllTeacherSubjectsByClassId(classId);
+        model.addAttribute("teacherSubjects", teacherSubjectsInClass);
+
+        model.addAttribute("clazz", clazzOptional.get());
+        return "classes/class";
     }
 
     @GetMapping(path = "/class/form")

@@ -25,4 +25,8 @@ public class StudentService {
     public Optional<Student> findStudentById(Long studentId) {
         return studentRepository.findById(studentId);
     }
+
+    public Set<Student> getAllStudentsByClass(Long classId) {
+        return studentRepository.getAllStudentsByClass(classId);
+    }
 }
